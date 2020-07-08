@@ -6,7 +6,7 @@ class Dishdetail extends Component{
 	renderDish(dish){
         if(dish != null)
             return(
-                <Card>
+                <Card >
                     <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
@@ -24,11 +24,15 @@ class Dishdetail extends Component{
     	var comments;
     	if(dishComments!=null)
 	    {  comments=dishComments.map(c=>{
-	    						return(<React.Fragment>
-	    						<CardTitle>{c.comment}</CardTitle>
-	    						<CardText>--{c.author}</CardText>
-	    					</React.Fragment>)
-	    					})
+	    	    return(<div key={c.id} className="list-unstyled">
+	  
+	    	    	<h4>{c.comment}</h4>
+	    	    	<h4>--{c.author},{c.date}</h4>
+
+
+	    	    </div>);
+	    	})
+	    
 	    	comments=<><h1>Comments</h1>{comments}</>
     	}
 		else
@@ -53,7 +57,7 @@ class Dishdetail extends Component{
 
 	                </div>
 				)
-				else return(<div></div) 
+				else return(<div></div>) 
 	}
 }
 
