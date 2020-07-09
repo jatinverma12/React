@@ -46,6 +46,7 @@ class Dishdetail extends Component{
 
 				if(this.props.selectedDish !=null)
 				return(
+				<div className="container">
 					<div className="row">
 	                  
 	                  <div  className="col-12 col-md-5 m-1">
@@ -56,6 +57,7 @@ class Dishdetail extends Component{
 	                  </div>
 
 	                </div>
+	             </div>
 				)
 				else return(<div></div>) 
 	}
