@@ -29,6 +29,6 @@ export const dishesFailed=(errmess)=>({
 });
 
 export const addDishes=(dishes)=>({
-	action:ActionTypes.ADD_DISHES,
+	type:ActionTypes.ADD_DISHES,
 	payload:dishes
 });
