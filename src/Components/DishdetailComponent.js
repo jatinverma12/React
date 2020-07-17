@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import { baseUrl } from '../shared/baseUrl';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle,Breadcrumb,BreadcrumbItem,Button,Modal,ModalHeader,ModalBody,Col,Row,Label } from 'reactstrap';
 
@@ -12,7 +13,7 @@ import { Loading } from './LoadingComponent';
         if(dish != null)
             return(
                 <Card >
-                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
