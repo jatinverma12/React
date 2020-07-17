@@ -26,7 +26,7 @@ import { Loading } from './LoadingComponent';
             );
         };
 
-    function RenderComments({dishComments,addComment,dishId}){
+    function RenderComments({dishComments,postComment,dishId}){
     	var comments;
     	if(dishComments!=null)
 	    {  comments=dishComments.map(c=>{
@@ -40,7 +40,7 @@ import { Loading } from './LoadingComponent';
 	    	})
 	    
 	    	comments=<><h1>Comments</h1>{comments}
-        <Comment dishId={dishId} addComment={addComment} /></>
+        <Comment dishId={dishId} postComment={postComment} /></>
     	}
 		else
     	comments=(<div></div>)
@@ -69,7 +69,7 @@ class Comment extends Component{
   handleSubmit(values){
     if(!values.rating)
       values={...values,rating:"1"}
-    this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
+    this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
   }
 
   render(){
@@ -185,7 +185,7 @@ class Comment extends Component{
 		                  </div>
 		                  <div className="col-12 col-md-5 m-1" >
 		                    <RenderComments dishComments={props.comments} 
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         dishId={props.dish.id}/>
 		                  </div>
 
