@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+
 import { baseUrl } from '../shared/baseUrl';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle,Breadcrumb,BreadcrumbItem,Button,Modal,ModalHeader,ModalBody,Col,Row,Label } from 'reactstrap';
@@ -6,19 +7,26 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
 import {Link} from 'react-router-dom';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 
 	function RenderDish({dish}){
         if(dish != null)
             return(
-                <Card >
-                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.name}</CardTitle>
-                      <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+               <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                  <Card >
+                      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                      <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                      </CardBody>
+                  </Card>
+                </FadeTransform>
             );
         else
             return(
@@ -29,15 +37,22 @@ import { Loading } from './LoadingComponent';
     function RenderComments({dishComments,postComment,dishId}){
     	var comments;
     	if(dishComments!=null)
-	    {  comments=dishComments.map(c=>{
-	    	    return(<div key={c.id} className="list-unstyled">
-	  
-	    	    	<h4>{c.comment}</h4>
-	    	    	<h4>--{c.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(c.date)))}</h4>
+	    {  comments= <Stagger in>
+                      {dishComments.map(c=>{
+            	    	    return(
+                        <Fade in>
+                          <div key={c.id} className="list-unstyled">
+              	  
+              	    	    	<h4>{c.comment}</h4>
+              	    	    	<h4>--{c.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(c.date)))}</h4>
 
 
-	    	    </div>);
-	    	})
+              	    	    </div>
+                        </Fade>
+                        );
+            	    	})}
+                </Stagger>
+
 	    
 	    	comments=<><h1>Comments</h1>{comments}
         <Comment dishId={dishId} postComment={postComment} /></>
