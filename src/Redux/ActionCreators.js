@@ -181,6 +181,11 @@ export const addLeaders=(leaders)=>({
   payload:leaders
 });
 
+export const addFeedback=(feedback)=>({
+  type:ActionTypes.ADD_FEEDBACK,
+  payload:feedback
+});
+
 export const postFeedback=(firstname,lastname,telnum,email,agree,contactType,message)=>(dispatch)=>{
   const newFeedback={
     firstname:firstname,
@@ -213,6 +218,6 @@ export const postFeedback=(firstname,lastname,telnum,email,agree,contactType,mes
             throw error;
       })
     .then(response => response.json())
-    .then(response => alert(JSON.stringify(response)))
+    .then(response => dispatch(addFeedback(response))+alert(JSON.stringify(response)))
     .catch(error =>  { console.log('post feedback', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
 }
